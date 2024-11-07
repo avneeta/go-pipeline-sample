@@ -31,14 +31,9 @@ pipeline:
                   name: Run Unit Test
                   identifier: Run_1
                   spec:
-                    connectorRef: GCR
-                    image: us.gcr.io/harness-take-home/harness-image:latest
+                    connectorRef: account.harnessImage
+                    image: harness-image
                     shell: Sh
-                    command: |-
-                      set +e
-                      go get gotest.tools/gotestsum
-                      gotestsum --format=standard-verbose --junitfile unit-tests.xml
-                      exit 0
                     reports:
                       type: JUnit
                       spec:
@@ -49,22 +44,6 @@ pipeline:
                   name: Build app
                   identifier: Build_app
                   spec:
-                    connectorRef: GCR
-                    image: gcr.io/harness-take-home/harness-image:latest
+                    connectorRef: account.harnessImage
+                    image: harness-image
                     shell: Sh
-                    command: |-
-                      set +e
-                      gotest gotest.tools/gotestsum
-                      CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo
-                      exit 0
-              - step:
-                  type: BuildAndPushGCR
-                  name: BuildAndPushGCR_1
-                  identifier: BuildAndPushGCR_1
-                  spec:
-                    connectorRef: GCR
-                    host: gcr.io
-                    projectID: harness-take-home
-                    imageName: harness-image
-                    tags:
-                      - latest
