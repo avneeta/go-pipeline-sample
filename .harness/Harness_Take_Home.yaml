@@ -65,6 +65,6 @@ pipeline:
                     connectorRef: GCR
                     host: us.gcr.io
                     projectID: harness-take-home
-                    imageName: <+input>
+                    imageName: harness-th-image
                     tags:
                       - latest
