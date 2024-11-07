@@ -32,7 +32,7 @@ pipeline:
                   identifier: Run_1
                   spec:
                     connectorRef: GCR
-                    image: gcr.io/harness-take-home/harness-image:latest
+                    image: us.gcr.io/harness-take-home/harness-image:latest
                     shell: Sh
                     command: |-
                       set +e
